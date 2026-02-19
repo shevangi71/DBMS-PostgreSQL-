@@ -1,0 +1,55 @@
+TASK A: Processing with data ['100', 'K Misri', 'k.misri@uea.ac.uk']
+FAILURE: Integrity Error. Constraint Violated. Details: ERROR:  duplicate key value violates unique constraint "spectator_pkey"
+DETAIL:  Key (sno)=(100) already exists.
+---
+TASK B: Processing with data ['A100', '100 metres sprint', 'Stadium 1', '2026-07-12', '16:00', '1000']
+FAILURE: Integrity Error. Constraint Violated. Details: ERROR:  duplicate key value violates unique constraint "event_pkey"
+DETAIL:  Key (ecode)=(A100) already exists.
+---
+TASK E: Processing with data ['A100', '100']
+FAILURE: Integrity Error. Constraint Violated. Details: ERROR:  duplicate key value violates unique constraint "only_one_ticket"
+DETAIL:  Key (ecode, sno)=(A100, 100) already exists.
+---
+TASK F: Processing with data []
+Report F: Spectators Liable to Travel:
+        edate  elocation  total_spectators
+0  2026-07-12    Arena 2                 3
+1  2026-07-12     Marina                 3
+2  2026-07-12  Stadium 1                 5
+TASK G: Processing with data []
+Report G: Total Tickets Issued Per Event:
+               edesc ecode  total_tickets_issued
+0  100 metres sprint  A100                     5
+1  400 metres sprint  A400                     2
+2               Judo  JUDO                     3
+3          Long Jump  ALJP                     2
+4           Marathon  AMTH                     3
+5           Swimming  SWIM                     0
+6       Wind Surfing  WSRF                     2
+7       Yacht Racing  YCHT                     3
+TASK H: Processing with data ['A100']
+Report H: Total active tickets for A100: 5
+TASK I: Processing with data ['100']
+Report I: Schedule for Spectator 100 (Active Tickets):
+    sname       edate  elocation     etime              edesc
+0  J Chin  2026-07-12  Stadium 1  10:00:00          Long Jump
+1  J Chin  2026-07-12    Arena 2  10:00:00               Judo
+2  J Chin  2026-07-12  Stadium 1  16:00:00  100 metres sprint
+TASK J: Processing with data ['1']
+Report J: Details for Ticket 1:
+   tno   sname ecode status
+0    1  J Chin  A100  Valid
+TASK D: Processing with data ['A100']
+SUCCESS: Event A100 deleted (Tickets automatically cancelled and moved to audit log).
+TASK K: Processing with data ['A100']
+Report K: Cancelled tickets for A100 (Audit Log):
+   tno  sno                      cdate     cuser
+0    1  100 2025-12-10 21:27:48.872601  cxh25psu
+1    2  200 2025-12-10 21:27:48.872601  cxh25psu
+2    3  300 2025-12-10 21:27:48.872601  cxh25psu
+3    4  500 2025-12-10 21:27:48.872601  cxh25psu
+4   20  400 2025-12-10 21:27:48.872601  cxh25psu
+TASK C: Processing with data ['100']
+SUCCESS: Spectator 100 deleted (Tickets automatically cancelled and moved to audit log).
+TASK L: Processing with data []
+SUCCESS: Database tables emptied.
